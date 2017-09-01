@@ -20,11 +20,11 @@
     </ul>
   </div>
 </nav>
-<div class="container-fluid">
+
 <div class="jumbotron">
 <h3>My-Gadgets!!</h3>
 <h4>Welcome to the world of gadgets!</h4>
-</div>
+
 </div>
 
 <div class="container-fluid">
