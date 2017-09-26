@@ -12,19 +12,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.niit.com.NIITEcommerce.UserDao.UserDao;
 import com.niit.com.NIITEcommerce.Usermodel.User;
-@Repository("UserDao")
-@Transactional
+
+
 public class UserDaoImpl implements UserDao {
 
 	@Autowired
 	SessionFactory sessionFactory;
 
-	UserDaoImpl(SessionFactory sessionfactory){
+	public UserDaoImpl(SessionFactory sessionfactory){
 		this.sessionFactory=sessionfactory;
 	}
 	public void saveUser(User user) {
 
 		Session session = sessionFactory.getCurrentSession();
+		user.setRole("ROLE_ADMIN");
 		session.saveOrUpdate(user);
 	}
 

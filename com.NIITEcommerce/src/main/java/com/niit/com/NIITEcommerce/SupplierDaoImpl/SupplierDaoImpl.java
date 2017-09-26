@@ -12,14 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.niit.com.NIITEcommerce.SupplierDao.SupplierDao;
 import com.niit.com.NIITEcommerce.Suppliermodel.Supplier;
 
-@Repository("SupplierDao")
-@Transactional
+
 public class SupplierDaoImpl implements SupplierDao{
 
 	@Autowired
 	SessionFactory sessionfactory;
 	
-	SupplierDaoImpl(SessionFactory sessionfactory){
+	public SupplierDaoImpl(SessionFactory sessionfactory){
 		this.sessionfactory=sessionfactory;
 	}
 

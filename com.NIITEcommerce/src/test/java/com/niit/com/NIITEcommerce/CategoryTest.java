@@ -15,8 +15,8 @@ public class CategoryTest {
 		CategoryDao categoryDao = (CategoryDao) context.getBean("CategoryDao");
 
 		
-		category.setcId(1);
-		category.setcName("Novel");
+		category.setcId(3);
+		category.setcName("Novelkk");
 		category.setCdescription("Belongs to chetan bhagat");
 		
 		categoryDao.saveOrUpdate(category);

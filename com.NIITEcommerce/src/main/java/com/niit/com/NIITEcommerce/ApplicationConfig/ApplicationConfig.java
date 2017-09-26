@@ -1,9 +1,10 @@
 package com.niit.com.NIITEcommerce.ApplicationConfig;
 
-import java.util.Properties;
+import java.util.*;
 
 import javax.sql.DataSource;
 
+import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -14,14 +15,13 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.niit.com.NIITEcommerce.Categorymodel.Category;
-import com.niit.com.NIITEcommerce.ProductModel.Product;
-import com.niit.com.NIITEcommerce.SupplierDao.SupplierDao;
-import com.niit.com.NIITEcommerce.Suppliermodel.Supplier;
 import com.niit.com.NIITEcommerce.Usermodel.User;
 
+
+
+
 @Configuration
-@ComponentScan("com.niit.com.NIITEcommerce")
+@ComponentScan("com.niit.com.NIITEcommerce.*")
 @EnableTransactionManagement
 public class ApplicationConfig {
 	
@@ -30,6 +30,7 @@ public class ApplicationConfig {
 @Bean(name="dataSource")
 public DataSource getH2DataSource() {
 		System.out.println("Data Source Method");
+		 
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("org.h2.Driver");
 		dataSource.setUrl("jdbc:h2:tcp://localhost/~/test");
@@ -52,7 +53,7 @@ public DataSource getH2DataSource() {
 	}
 
 	@Autowired
-	@Bean(name = "sessionFactory")
+	@Bean(name ="sessionFactory")
 	public SessionFactory getSessionFactory() {
 		System.out.println("SessionFactory Method-Entered");
 		LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(getH2DataSource());
@@ -65,10 +66,32 @@ public DataSource getH2DataSource() {
 		System.out.println("SessionFactory Object Created");
 		return sessionfactory;
 	}
+	@Bean(name="ProductDao")
+	public ProductDao getProductDAO(SessionFactory sessionFactory)
+	{
+		System.out.println(" product dao");
+	return new ProductDaoImpl(sessionFactory);
+	}
+	@Bean(name="CategoryDao")
+	public CategoryDao getCategoryDAO(SessionFactory sessionFactory)
+	{
+	return new CategoryDaoImpl(sessionFactory);
+	}
+
+	@Bean(name="SupplierDao")
+	public SupplierDao getSupplierDao(SessionFactory sessionFactory)
+	{
+	return new SupplierDaoImpl(sessionFactory);
+	}
+	@Bean(name="UserDao")
+	public UserDao getUserDao(SessionFactory sessionFactory)
+	{
+	return new UserDaoImpl(sessionFactory);
+	}
 
 	
 	@Autowired
-	@Bean(name = "transactionManager")
+	@Bean(name ="transactionManager")
 	public HibernateTransactionManager getTransactionManager(SessionFactory sessionFactory) {
 		System.out.println("Transaction Manager");
 		HibernateTransactionManager transactionManager = new HibernateTransactionManager(sessionFactory);

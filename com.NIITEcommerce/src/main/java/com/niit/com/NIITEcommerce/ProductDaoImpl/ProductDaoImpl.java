@@ -12,14 +12,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.niit.com.NIITEcommerce.ProductDao.ProductDao;
 import com.niit.com.NIITEcommerce.ProductModel.Product;
 
-@Repository("ProductDao")
-@Transactional
+
+
 public class ProductDaoImpl implements ProductDao {
 
 	@Autowired
 	SessionFactory sessionfactory;
 
-	ProductDaoImpl(SessionFactory sessionfactory) {
+	public ProductDaoImpl(SessionFactory sessionfactory) {
 		this.sessionfactory = sessionfactory;
 	}
 

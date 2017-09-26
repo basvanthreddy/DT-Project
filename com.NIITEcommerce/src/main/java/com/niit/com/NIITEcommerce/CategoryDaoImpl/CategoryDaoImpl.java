@@ -12,18 +12,19 @@ import org.springframework.transaction.annotation.Transactional;
 import com.niit.com.NIITEcommerce.CategoryDao.CategoryDao;
 import com.niit.com.NIITEcommerce.Categorymodel.Category;
 
-
-@Repository("CategoryDao")
-@Transactional
 public class CategoryDaoImpl implements CategoryDao{
 
 	@Autowired
 	SessionFactory sessionfactory;
-	CategoryDaoImpl(SessionFactory sessionfactory){
+	
+	public CategoryDaoImpl(SessionFactory sessionfactory){
 		this.sessionfactory=sessionfactory;
 	}
 	
-	
+	public CategoryDaoImpl()
+	{
+		
+	}
 	public void saveOrUpdate(Category category) {
 		Session session=sessionfactory.getCurrentSession();
 		session.saveOrUpdate(category);
